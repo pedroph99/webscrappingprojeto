@@ -15,16 +15,40 @@ request_data={'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebK
 session=requests.Session()
 a=session.get(url)
 
+b=a.cookies
+print(b)
+data_info = {'email': 'pedroph99@outlook.com',
+        'password': 'ph454566',
+                }
 
+
+c=session.post(url+login, data=data_info)
+print(c.text)
+print(c.status_code)
 
 
 d=session.get('https://www.investing.com/portfolio/')
 
 htmlmoeda=BeautifulSoup(d.content, 'html.parser')
 
-print(htmlmoeda.find('h1'))
+tbodypage=htmlmoeda.find('tbody', {'id': 'tbody_overview_34092673'})
 
-#r=session.ost(url+login, headers=request_data, data=data_info, cookies=b)
-#print(r.text)
+parseador=tbodypage.find_all('tr')
 
- 
+for x in parseador:
+
+        try:
+                moeda=x.find('td', {'data-column-name':'name'})
+                moeda2=moeda.find('span')
+                print(moeda2.text)
+        except:
+                pass
+
+
+
+
+
+
+
+
+#
