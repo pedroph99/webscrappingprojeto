@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from Analisacnpj import analisa
-
+from treino import cria_workbook
 #lista_cnpj é realizada pela função analisa, a qual retorna uma lista de cnpjs.
 
 
@@ -31,7 +31,7 @@ def roda_jucepe(_cnpj=None):
     digita_cpf = driver.find_element(by=By.ID, value='_ctl0_MainContent_txtCPFCNPJ')
     digita_cpf.send_keys('cpf')
     digita_senha = driver.find_element(by=By.ID, value='_ctl0_MainContent_txtSenha')
-    digita_senha.send_keys('senha delah')
+    digita_senha.send_keys('senha.2019')
 
     entra_site = driver.find_element(by=By.NAME, value='_ctl0:MainContent:btnEntrar')
     entra_site.click()
@@ -89,16 +89,26 @@ def roda_tudo(arquivo):
     for x in range(len(a)):
         try:
             cria_dicionario(guarda_dicionario, a[x], roda_jucepe(a[x]))
-            time.sleep(30)
+            print(guarda_dicionario)
+            time.sleep(5)
         except:
             print('%s é inválido e não pode ser lido pela JUCEPE' %(a[x]))
-            time.sleep(15)
-        print(guarda_dicionario)
+            cria_dicionario(guarda_dicionario, a[x], 'nao passou')
+            time.sleep(5)
         
-
+inicio=time.time()
 roda_tudo('CNPJJ')
-
-
-
-
-
+fim=time.time()
+print(fim-inicio)
+"""""
+lista2=[]
+for x in range(len(analisa('CNPJJ'))):
+    lista2.append(guarda_dicionario[x][0])
+print(lista2)
+cria_workbook('moedas.xlsx', analisa('CNPJJ'), lista2 )
+"""
+lista2={}
+for x in range(len(analisa('CNPJJ'))):
+    lista2[x] = guarda_dicionario[x][analisa('CNPJJ')[x]]
+print(lista2)
+cria_workbook('jucepe.xlsx', analisa('CNPJJ'), lista2 )

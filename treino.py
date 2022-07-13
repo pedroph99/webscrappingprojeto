@@ -1,5 +1,4 @@
-from multiprocessing import Value
-from pyparsing import col
+
 import requests
 from bs4 import BeautifulSoup
 import openpyxl
@@ -13,9 +12,6 @@ getmoeda2=getmoeda.content
 
 htmlmoeda=BeautifulSoup(getmoeda2, 'html.parser')
 c=htmlmoeda.find('tbody')
-
-os.chdir('./Automacoa')
-
 print(len(c.find_all('tr')))
 lista=[]
 lista2=[]
@@ -28,8 +24,8 @@ for x in range(len(c.find_all('tr'))):
     lista2.append((float(preco3)))
     
 
-def cria_workbook(nome, lista1):
-    wb= openpyxl.load_workbook('moedas.xlsx')
+def cria_workbook(nome, lista1, lista2):
+    wb= openpyxl.load_workbook('jucepe.xlsx')
     ws=wb[wb.sheetnames[0]]
 
 
@@ -41,7 +37,7 @@ def cria_workbook(nome, lista1):
             ws[actual_cell]=lista1[counter2]
             counter2+=1
         else:
-            ws[actual_cell]='moeda'
+            ws[actual_cell]='cnpj'
 
         counter+=1
 
@@ -53,10 +49,10 @@ def cria_workbook(nome, lista1):
             ws[actual_cell]=lista2[counter2]
             counter2+=1
         else:
-            ws[actual_cell]='preço venda'
+            ws[actual_cell]='Situacao'
 
         counter+=1
 
 
-    wb.save('moedas.xlsx')
-cria_workbook('moedas', lista )
+    wb.save('jucepe.xlsx')
+cria_workbook('jucepe', lista, lista2 )
