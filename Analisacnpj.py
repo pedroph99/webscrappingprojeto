@@ -1,10 +1,10 @@
 import openpyxl
 import os
-import tkinter
+
 import teste
-def analisa(arquivo, frame):
-    for widgets in frame.winfo_children():
-      widgets.destroy()
+def analisa(arquivo):
+    #for widgets in frame.winfo_children():
+    #  widgets.destroy()
     try:
         os.chdir('./Automacoa')
     except:
@@ -52,31 +52,6 @@ def analisa(arquivo, frame):
 
             except:
                 pass
-    lista_empresa=[]
-    current_row=int(trace_row) +1
-    while current_row <= int(ws.max_row):
 
-        d=ws.cell(row=current_row, column=trace_column)
-        lista_empresa.append(d.value)
-
-        current_row+=1
-
-    print(lista_cnpj)
-    print(lista_empresa)
-
-    for x in range(len(lista_cnpj)):
-        if teste.testecnpj(lista_cnpj[x]):
-
-            try:
-                labelteste=tkinter.Label(frame, text=(lista_cnpj[x]+''+lista_empresa[x]))
-                labelteste.pack()
-            except TypeError:
-                labelteste=tkinter.Label(frame, text=(lista_cnpj[x]+''+'empresa sem nome'))
-                labelteste.pack()
-
-    
-        else:
-            labelteste=tkinter.Label(frame, text=(lista_empresa[x]+ ' ' +'é' ' '+ 'inválido'))
-            labelteste.pack()
-
-
+    return lista_cnpj
+print(analisa('CNPJJ'))

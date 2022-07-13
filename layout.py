@@ -1,10 +1,11 @@
 
-import tkinter
+from tkinter import Tk
+from tk import *
+
 import Analisacnpj
-from sqlalchemy import TEXT
 current_arquivo=[None]
 
-root=tkinter.Tk()
+root=Tk.tk()
 root.resizable=False
 TopFrame=tkinter.Frame(root, width=100)
 TopText=tkinter.Label(TopFrame, text='ANALISA CNPJ')

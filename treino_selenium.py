@@ -23,15 +23,15 @@ from Analisacnpj import analisa
 
 def roda_jucepe(_cnpj=None):
 
-    path = 'C:/Users/pedro/Downloads/chromedriver_win32/chromedriver'
+    path = '/home/pedromello/Downloads/chromedriver_linux64/chromedriver'
 
     driver = webdriver.Chrome(path)
 
     driver2 = driver.get('https://redesim.jucepe.pe.gov.br/requerimentouniversal/NovoLogin.aspx')
     digita_cpf = driver.find_element(by=By.ID, value='_ctl0_MainContent_txtCPFCNPJ')
-    digita_cpf.send_keys('24725617415')
+    digita_cpf.send_keys('cpf')
     digita_senha = driver.find_element(by=By.ID, value='_ctl0_MainContent_txtSenha')
-    digita_senha.send_keys('Data.2019')
+    digita_senha.send_keys('senha delah')
 
     entra_site = driver.find_element(by=By.NAME, value='_ctl0:MainContent:btnEntrar')
     entra_site.click()
@@ -47,10 +47,10 @@ def roda_jucepe(_cnpj=None):
     selecionar=Select(seleciona_cnpj)
     selecionar.select_by_value('1')
 
-    cnpj = '33186127000104'
+   
 
     digita_cnpj=driver.find_element(by=By.ID, value='_ctl0_MainContent_txtCNPJ')
-    digita_cnpj.send_keys(cnpj)
+    digita_cnpj.send_keys(_cnpj)
 
     submit_button=driver.find_element(by=By.ID, value="_ctl0_MainContent_btnBuscar")
     submit_button.click()
@@ -96,7 +96,7 @@ def roda_tudo(arquivo):
         print(guarda_dicionario)
         
 
-roda_tudo('cnpjj')
+roda_tudo('CNPJJ')
 
 
 
