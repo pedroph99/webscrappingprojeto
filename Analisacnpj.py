@@ -19,7 +19,7 @@ def analisa(arquivo):
     #Identifica o campo CNPJ
     trace_row=None
     trace_column=None
-
+    print(ws.max_row)
     for x in range(ws.max_column+1):
         for y in range(ws.max_row+1):
             try:
@@ -30,18 +30,23 @@ def analisa(arquivo):
 
             except:
                 pass
-
-    #pega todos os CNPJS de maneira vertical. 
+       #pega todos os CNPJS de maneira vertical. 
     lista_cnpj=[]
+
     current_row=int(trace_row) +1
     while current_row <= int(ws.max_row):
         d=ws.cell(row=current_row, column=trace_column)
-        lista_cnpj.append(d.value)
+        if d.value !=None:
+
+            lista_cnpj.append(d.value)
+        else:
+            pass
 
         current_row+=1
 
 
 
+    lista_empresa = []
     for x in range(ws.max_column+1):
         for y in range(ws.max_row+1):
             try:
@@ -53,5 +58,18 @@ def analisa(arquivo):
             except:
                 pass
 
-    return lista_cnpj
-print(analisa('CNPJJ'))
+
+    current_row=int(trace_row) +1
+    while current_row <= int(ws.max_row):
+        d=ws.cell(row=current_row, column=trace_column)
+        if d.value !=None:
+            lista_empresa.append(d.value)
+        else:
+            pass
+
+        current_row+=1
+
+    print(lista_cnpj)
+
+    return [lista_cnpj, lista_empresa]
+

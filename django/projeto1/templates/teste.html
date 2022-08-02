@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>LOGIN E SENHA PROJETO</title>
+    </head>
+    <body>
+        <ul>
+            {%for x in user_data %}
+            <h1>{{x.username}}</h1>
+            <h2>{{x.password}}</h2>
+            {% endfor %}
+
+        </ul>
+        <hr/>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="nome" id="nome"/>
+            <input type="password" name="senha" id="senha"/>
+
+            <input type="submit" value="Salvar"/>
+        </form>
+        {{mensagem}}
+        {% if tried %}
+        <p>A sua senha apresenta uma baixa segurança.</p>
+        {% endif %}
+    </body>
+</html>

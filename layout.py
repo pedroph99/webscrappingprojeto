@@ -1,11 +1,10 @@
 
-from tkinter import Tk
 from tk import *
 
 import Analisacnpj
 current_arquivo=[None]
 
-root=Tk.tk()
+root=tkinter.tk()
 root.resizable=False
 TopFrame=tkinter.Frame(root, width=100)
 TopText=tkinter.Label(TopFrame, text='ANALISA CNPJ')
